@@ -27,7 +27,6 @@ const Jobs = () => {
     return (
         <div>
             <Navbar />
-            {/* Add padding to account for the navbar */}
             <div className="max-w-7xl mx-auto mt-5 pt-20">
                 <div className="flex gap-5">
                     <div className="w-20%">

@@ -50,7 +50,7 @@ const CompanyCreate = () => {
                 <Input
                     type="text"
                     className="my-2"
-                    placeholder="JobHunt, Microsoft etc."
+                    placeholder="KisanLink, Microsoft etc."
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
                 />

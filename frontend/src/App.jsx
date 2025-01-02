@@ -14,8 +14,13 @@ import AdminJobs from "./components/admin/AdminJobs";
 import PostJob from './components/admin/PostJob'
 import Applicants from './components/admin/Applicants'
 import ProtectedRoute from './components/admin/ProtectedRoute'
-
-
+import CompanyPage from './components/CompanyPage'
+import ApplicationsPage from './components/ApplicationsPage'
+import ApplicantsPage from './components/admin/ApplicantsPage'
+import EditJob from './components/admin/EditJob'
+import DeleteJob from './components/admin/DeleteJob'
+import DeleteCompany from './components/admin/DeleteCompany'
+import SaveJobPage from './components/SaveJobPage'
 const appRouter = createBrowserRouter([
   {
     path: '/',
@@ -38,6 +43,14 @@ const appRouter = createBrowserRouter([
     element: <JobDescription />
   },
   {
+    path:"/companies",
+    element:<CompanyPage/>
+  },
+  {
+    path:"/applications",
+    element:<ApplicationsPage/>
+  },
+  {
     path: "/browse",
     element: <Browse />
   },
@@ -45,7 +58,11 @@ const appRouter = createBrowserRouter([
     path: "/profile",
     element: <Profile />
   },
-  // admin ke liye yha se start hoga
+  {
+    path: '/save-jobs',
+    element: <SaveJobPage />
+  },
+  //Admin routes
   {
     path:"/admin/companies",
     element: <ProtectedRoute><Companies/></ProtectedRoute>
@@ -59,6 +76,10 @@ const appRouter = createBrowserRouter([
     element:<ProtectedRoute><CompanySetup/></ProtectedRoute> 
   },
   {
+    path:"/admin/applicants",
+    element:<ApplicantsPage/>
+  },
+  {
     path:"/admin/jobs",
     element:<ProtectedRoute><AdminJobs/></ProtectedRoute> 
   },
@@ -67,9 +88,21 @@ const appRouter = createBrowserRouter([
     element:<ProtectedRoute><PostJob/></ProtectedRoute> 
   },
   {
+    path:"/admin/update/:id",
+    element:<ProtectedRoute><EditJob/></ProtectedRoute>
+  },
+  {
     path:"/admin/jobs/:id/applicants",
     element:<ProtectedRoute><Applicants/></ProtectedRoute> 
   },
+  {
+    path:"/admin/delete/:id",
+    element:<ProtectedRoute><DeleteJob/></ProtectedRoute>
+  },
+  {
+    path:"/admin/companies/delete/:id",
+    element:<ProtectedRoute><DeleteCompany/></ProtectedRoute>
+  }
 
 ])
 function App() {

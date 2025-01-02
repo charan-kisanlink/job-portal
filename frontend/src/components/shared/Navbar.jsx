@@ -79,7 +79,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/" className="hover:text-[#F83002]">
+                  <Link to="/companies" className="hover:text-[#F83002]">
                     Companies
                   </Link>
                 </li>
@@ -89,7 +89,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/" className="hover:text-[#F83002]">
+                  <Link to="/applications" className="hover:text-[#F83002]">
                     Applications
                   </Link>
                 </li>

@@ -50,6 +50,32 @@ export const getCompany = async (req, res) => {
         console.log(error);
     }
 }
+//get all companies
+export const getAllCompanies = async (req, res) => {
+    try {
+        // Fetch all companies from the database
+        const companies = await Company.find();
+
+        if (!companies || companies.length === 0) {
+            return res.status(404).json({
+                message: "No companies found.",
+                success: false,
+            });
+        }
+
+        return res.status(200).json({
+            companies,
+            success: true,
+        });
+    } catch (error) {
+        console.error("Error fetching companies:", error);
+        return res.status(500).json({
+            message: "Server error. Please try again later.",
+            success: false,
+        });
+    }
+};
+
 // get company by id
 export const getCompanyById = async (req, res) => {
     try {
@@ -97,3 +123,27 @@ export const updateCompany = async (req, res) => {
         console.log(error);
     }
 }
+export const deleteCompany = async (req, res) => {
+    try {
+        const companyId = req.params.id;
+        const company = await Company.findById(companyId);
+        if (!company) {
+            return res.status(404).json({
+                message: "Company not found.",
+                success: false,
+            });
+        }
+        await Company.findByIdAndDelete(companyId);
+
+        return res.status(200).json({
+            message: "Company deleted successfully.",
+            success: true,
+        });
+    } catch (error) {
+        console.error("Error deleting company:", error);
+        return res.status(500).json({
+            message: "Server error. Please try again later.",
+            success: false,
+        });
+    }
+};

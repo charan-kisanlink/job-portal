@@ -77,7 +77,7 @@ const CompanySetup = () => {
     return (
         <div>
             <Navbar />
-            <div className="max-w-3xl mx-auto mt-12 mb-10 p-8 bg-white rounded-xl shadow-lg mt-15">
+            <div className="max-w-3xl mx-auto mt-12 mb-10 p-8 bg-white rounded-xl shadow-lg mt-28">
                 <form onSubmit={submitHandler}>
                     <div className="flex items-center gap-4 mb-6">
                         <Button
@@ -90,8 +90,6 @@ const CompanySetup = () => {
                         </Button>
                         <h1 className="font-bold text-2xl text-gray-700">Company Setup</h1>
                     </div>
-
-                    {/* Section 1: Company Information */}
                     <section className="mb-8">
                         <h2 className="text-xl font-semibold text-gray-800 mb-4">Company Information</h2>
                         <div className="grid grid-cols-2 gap-6">
@@ -140,8 +138,6 @@ const CompanySetup = () => {
                             </div>
                         </div>
                     </section>
-
-                    {/* Section 2: Logo Upload */}
                     <section className="mb-8">
                         <h2 className="text-xl font-semibold text-gray-800 mb-4">Company Logo</h2>
                         <div>
@@ -155,7 +151,7 @@ const CompanySetup = () => {
                         </div>
                     </section>
 
-                    {/* Submit Button */}
+                    
                     {loading ? (
                         <Button className="w-full py-3 bg-blue-600 text-white hover:bg-blue-700 flex items-center justify-center">
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />

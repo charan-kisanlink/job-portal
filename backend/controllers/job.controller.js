@@ -100,3 +100,83 @@ export const getAdminJobs = async (req, res) => {
         console.log(error);
     }
 }
+export const updateJob = async (req, res) => {
+    try {
+      const jobId = req.params.id;
+      const { title, description, requirements, salary, location, jobType, experience, position, companyId } = req.body;
+      const userId = req.id; 
+      if (!title || !description || !requirements || !salary || !location || !jobType || !experience || !position || !companyId) {
+        return res.status(400).json({
+          message: "Something is missing.",
+          success: false
+        });
+      }
+      const updatedJob = await Job.findByIdAndUpdate(
+        jobId, 
+        {
+          title,
+          description,
+          requirements: requirements.split(","),
+          salary: Number(salary),
+          location,
+          jobType,
+          experienceLevel: experience,
+          position,
+          company: companyId,
+          updated_by: userId 
+        },
+        { new: true } 
+      );
+      if (!updatedJob) {
+        return res.status(404).json({
+          message: "Job not found.",
+          success: false
+        });
+      }
+  
+      return res.status(200).json({
+        message: "Job updated successfully.",
+        job: updatedJob,
+        success: true
+      });
+  
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        message: "An error occurred while updating the job.",
+        success: false
+      });
+    }
+  };
+  export const deleteJob = async (req, res) => {
+    try {
+        const jobId = req.params.id;
+        const userId = req.id; 
+        const job = await Job.findById(jobId);
+
+        if (!job) {
+            return res.status(404).json({
+                message: "Job not found.",
+                success: false
+            });
+        }
+        if (job.created_by.toString() !== userId.toString()) {
+            return res.status(403).json({
+                message: "You are not authorized to delete this job.",
+                success: false
+            });
+        }
+        await Job.findByIdAndDelete(jobId);
+
+        return res.status(200).json({
+            message: "Job deleted successfully.",
+            success: true
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "An error occurred while deleting the job.",
+            success: false
+        });
+    }
+};

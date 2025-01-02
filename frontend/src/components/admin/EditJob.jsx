@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../shared/Navbar';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
@@ -8,12 +8,10 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import axios from 'axios';
 import { JOB_API_END_POINT } from '@/utils/constant';
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 
-const companyArray = [];
-
-const PostJob = () => {
+const EditJob = () => {
     const [input, setInput] = useState({
         title: "",
         description: "",
@@ -27,8 +25,36 @@ const PostJob = () => {
     });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
+    const { id } = useParams(); // Get job ID from URL
+    console.log(id);
     const { companies } = useSelector(store => store.company);
+
+    useEffect(() => {
+        const fetchJobDetails = async () => {
+            try {
+                const res = await axios.get(`${JOB_API_END_POINT}/get/${id}`, {
+                    withCredentials: true
+                });
+                if (res.data.success) {
+                    setInput({
+                        title: res.data.job.title,
+                        description: res.data.job.description,
+                        requirements: res.data.job.requirements.join(","),
+                        salary: res.data.job.salary,
+                        location: res.data.job.location,
+                        jobType: res.data.job.jobType,
+                        experience: res.data.job.experienceLevel,
+                        position: res.data.job.position,
+                        companyId: res.data.job.company._id
+                    });
+                }
+            } catch (error) {
+                toast.error("Error fetching job details.");
+            }
+        };
+        fetchJobDetails();
+    }, [id]);
+
     const changeEventHandler = (e) => {
         setInput({ ...input, [e.target.name]: e.target.value });
     };
@@ -42,7 +68,7 @@ const PostJob = () => {
         e.preventDefault();
         try {
             setLoading(true);
-            const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
+            const res = await axios.put(`${JOB_API_END_POINT}/update/${id}`, input, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -96,7 +122,7 @@ const PostJob = () => {
                             />
                         </div>
                         <div>
-                            <Label>Salary(In Lpa)</Label>
+                            <Label>Salary</Label>
                             <Input
                                 type="text"
                                 name="salary"
@@ -152,13 +178,11 @@ const PostJob = () => {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        {companies.map((company) => {
-                                            return (
-                                                <SelectItem key={company._id} value={company?.name?.toLowerCase()}>
-                                                    {company.name}
-                                                </SelectItem>
-                                            );
-                                        })}
+                                        {companies.map((company) => (
+                                            <SelectItem key={company._id} value={company?.name?.toLowerCase()}>
+                                                {company.name}
+                                            </SelectItem>
+                                        ))}
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
@@ -169,11 +193,11 @@ const PostJob = () => {
                             <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait
                         </Button>
                     ) : (
-                        <Button type="submit" className="w-full my-4">Post New Job</Button>
+                        <Button type="submit" className="w-full my-4">Update Job</Button>
                     )}
                     {companies.length === 0 && (
                         <p className='text-xs text-red-600 font-bold text-center my-3'>
-                            *Please register a company first, before posting a job
+                            *Please register a company first, before updating a job
                         </p>
                     )}
                 </form>
@@ -182,4 +206,4 @@ const PostJob = () => {
     );
 };
 
-export default PostJob;
+export default EditJob;

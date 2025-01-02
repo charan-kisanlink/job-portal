@@ -27,7 +27,7 @@ const ApplicantsTable = () => {
     }
 
     return (
-        <div className="mt-20"> {/* Adjust the margin-top to provide space below navbar */}
+        <div className="mt-20"> 
             <Table>
                 <TableCaption>A list of your recent applied user</TableCaption>
                 <TableHeader>

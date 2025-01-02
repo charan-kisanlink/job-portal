@@ -4,7 +4,7 @@ import { Search } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { setSearchedQuery } from '@/redux/jobSlice';
 import { useNavigate } from 'react-router-dom';
-import './HeroSection.css'; // Import your CSS file
+import './HeroSection.css'; 
 import CategoryCarousel from './CategoryCarousel';
 
 const HeroSection = () => {
@@ -19,7 +19,7 @@ const HeroSection = () => {
 
     return (
         <div className='hero-section text-center top-10'>
-            <div className='hero-background'></div> {/* Background image applied here */}
+            <div className='hero-background'></div> 
             <div className='flex flex-col gap-5 my-10 relative z-10'>
                 <span className='mx-auto px-4 py-2 rounded-full bg-gray-100 text-[#F83002] font-medium'>
                     Your Ultimate Opportunity Portal

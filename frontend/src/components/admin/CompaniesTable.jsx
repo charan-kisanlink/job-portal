@@ -67,5 +67,4 @@ const CompaniesTable = () => {
         </div>
     )
 }
-
 export default CompaniesTable;

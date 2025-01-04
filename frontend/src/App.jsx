@@ -21,6 +21,7 @@ import EditJob from './components/admin/EditJob'
 import DeleteJob from './components/admin/DeleteJob'
 import DeleteCompany from './components/admin/DeleteCompany'
 import SaveJobPage from './components/SaveJobPage'
+import Candidates from './components/admin/Candidates'
 const appRouter = createBrowserRouter([
   {
     path: '/',
@@ -63,6 +64,10 @@ const appRouter = createBrowserRouter([
     element: <SaveJobPage />
   },
   //Admin routes
+  {
+    path: "/admin/home",
+    element: <Candidates  />
+  },
   {
     path:"/admin/companies",
     element: <ProtectedRoute><Companies/></ProtectedRoute>

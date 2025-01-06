@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./shared/Navbar"; 
 import Footer from "./shared/Footer";
+import { COMPANY_API_END_POINT } from "@/utils/constant";
 
 const CompanyPage = () => {
   const [companies, setCompanies] = useState([]);
@@ -8,7 +9,7 @@ const CompanyPage = () => {
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/v1/company/getAll", {
+        const response = await fetch(COMPANY_API_END_POINT+"/getAll", {
           credentials: "include",
         });
         const data = await response.json();

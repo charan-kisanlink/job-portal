@@ -8,7 +8,7 @@ const Candidates = () => {
   useEffect(() => {
     const fetchCandidates = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/user/students');
+        const response = await fetch(USER_API_END_POINT+'/students');
         const data = await response.json();
         if (data.success) {
           setCandidates(data.students);

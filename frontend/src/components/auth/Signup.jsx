@@ -11,6 +11,8 @@ import { toast } from 'sonner';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '@/redux/authSlice';
 import { Loader2 } from 'lucide-react';
+import { UserCircle, Mail, Phone, Lock, ImagePlus } from 'lucide-react';
+import Footer from '../shared/Footer';
 
 const Signup = () => {
     const [input, setInput] = useState({
@@ -71,106 +73,230 @@ const Signup = () => {
     }, [user, navigate]);
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100 mt-20">
+        <div className="min-h-screen bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-50 via-white to-blue-50">
             <Navbar />
-            <div className="flex-grow flex items-center justify-center">
-                <form
-                    onSubmit={submitHandler}
-                    className="w-full max-w-md bg-white border border-gray-200 rounded-md p-6 shadow-md"
-                >
-                    <h1 className="font-bold text-xl mb-5">Sign Up</h1>
-                    <div className="my-2">
-                        <Label>Full Name</Label>
-                        <Input
-                            type="text"
-                            value={input.fullname}
-                            name="fullname"
-                            onChange={changeEventHandler}
-                            placeholder="Full Name"
-                        />
+            <div className="container mx-auto px-4 py-8 flex justify-center items-center min-h-[calc(100vh-64px)]">
+                <div className="w-full max-w-[540px] animate-fadeIn">
+                    {/* Header Section */}
+                    <div className="text-center mb-8 space-y-3">
+                        <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
+                            Join Our Community
+                        </h1>
+                        <p className="text-gray-600 text-lg">
+                            Create an account to unlock all features
+                        </p>
                     </div>
-                    <div className="my-2">
-                        <Label>Email</Label>
-                        <Input
-                            type="email"
-                            value={input.email}
-                            name="email"
-                            onChange={changeEventHandler}
-                            placeholder="example@gmail.com"
-                        />
-                    </div>
-                    <div className="my-2">
-                        <Label>Phone Number</Label>
-                        <Input
-                            type="text"
-                            value={input.phoneNumber}
-                            name="phoneNumber"
-                            onChange={changeEventHandler}
-                            placeholder="0000-0000-0000"
-                        />
-                    </div>
-                    <div className="my-2">
-                        <Label>Password</Label>
-                        <Input
-                            type="password"
-                            value={input.password}
-                            name="password"
-                            onChange={changeEventHandler}
-                            placeholder="XXXXXXXXXXXX"
-                        />
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <RadioGroup className="flex items-center gap-4 my-5">
-                            <div className="flex items-center space-x-2">
-                                <Input
-                                    type="radio"
-                                    name="role"
-                                    value="student"
-                                    checked={input.role === 'student'}
-                                    onChange={changeEventHandler}
-                                    className="cursor-pointer"
-                                />
-                                <Label htmlFor="r1">Student</Label>
+
+                    {/* Signup Form */}
+                    <form
+                        onSubmit={submitHandler}
+                        className="bg-white/90 backdrop-blur-xl rounded-3xl p-8 md:p-10 
+                        shadow-[0_8px_40px_rgb(0,0,0,0.08)] border border-white/60"
+                    >
+                        <div className="space-y-7">
+                            {/* Personal Information Section */}
+                            <div className="space-y-5">
+                                <h2 className="text-lg font-semibold text-gray-800">
+                                    Personal Information
+                                </h2>
+                                
+                                {/* Full Name Field */}
+                                <div className="relative group">
+                                    <Label className="text-gray-700 font-medium pl-1 mb-2 block">
+                                        Full Name
+                                    </Label>
+                                    <div className="relative">
+                                        <UserCircle className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 
+                                        text-gray-400 group-hover:text-indigo-500 transition-colors duration-200" />
+                                        <Input
+                                            type="text"
+                                            value={input.fullname}
+                                            name="fullname"
+                                            onChange={changeEventHandler}
+                                            placeholder="Enter your full name"
+                                            className="h-14 pl-12 rounded-xl border text-base
+                                            border-gray-200 hover:border-gray-300 focus:border-indigo-500
+                                            transition-all duration-200 bg-white/80"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Contact Information Grid */}
+                                <div className="grid md:grid-cols-2 gap-5">
+                                    {/* Email Field */}
+                                    <div className="relative group">
+                                        <Label className="text-gray-700 font-medium pl-1 mb-2 block">
+                                            Email Address
+                                        </Label>
+                                        <div className="relative">
+                                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 
+                                            text-gray-400 group-hover:text-indigo-500 transition-colors duration-200" />
+                                            <Input
+                                                type="email"
+                                                value={input.email}
+                                                name="email"
+                                                onChange={changeEventHandler}
+                                                placeholder="example@gmail.com"
+                                                className="h-14 pl-12 rounded-xl border text-base
+                                                border-gray-200 hover:border-gray-300 focus:border-indigo-500
+                                                transition-all duration-200 bg-white/80"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Phone Number Field */}
+                                    <div className="relative group">
+                                        <Label className="text-gray-700 font-medium pl-1 mb-2 block">
+                                            Phone Number
+                                        </Label>
+                                        <div className="relative">
+                                            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 
+                                            text-gray-400 group-hover:text-indigo-500 transition-colors duration-200" />
+                                            <Input
+                                                type="text"
+                                                value={input.phoneNumber}
+                                                name="phoneNumber"
+                                                onChange={changeEventHandler}
+                                                placeholder="0000-0000-0000"
+                                                className="h-14 pl-12 rounded-xl border text-base
+                                                border-gray-200 hover:border-gray-300 focus:border-indigo-500
+                                                transition-all duration-200 bg-white/80"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Password Field */}
+                                <div className="relative group">
+                                    <Label className="text-gray-700 font-medium pl-1 mb-2 block">
+                                        Password
+                                    </Label>
+                                    <div className="relative">
+                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 
+                                        text-gray-400 group-hover:text-indigo-500 transition-colors duration-200" />
+                                        <Input
+                                            type="password"
+                                            value={input.password}
+                                            name="password"
+                                            onChange={changeEventHandler}
+                                            placeholder="Create a strong password"
+                                            className="h-14 pl-12 rounded-xl border text-base
+                                            border-gray-200 hover:border-gray-300 focus:border-indigo-500
+                                            transition-all duration-200 bg-white/80"
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                            <div className="flex items-center space-x-2">
-                                <Input
-                                    type="radio"
-                                    name="role"
-                                    value="recruiter"
-                                    checked={input.role === 'recruiter'}
-                                    onChange={changeEventHandler}
-                                    className="cursor-pointer"
-                                />
-                                <Label htmlFor="r2">Recruiter</Label>
+
+                            {/* Account Type Section */}
+                            <div className="space-y-5">
+                                <h2 className="text-lg font-semibold text-gray-800">
+                                    Account Type & Profile
+                                </h2>
+
+                                <div className="grid md:grid-cols-2 gap-6">
+                                    {/* Role Selection */}
+                                    <div className="space-y-3">
+                                        <Label className="text-gray-700 font-medium pl-1">I am a</Label>
+                                        <RadioGroup className="grid grid-cols-2 gap-3">
+                                            {[
+                                                { value: 'student', label: 'Student', emoji: '👨‍🎓' },
+                                                { value: 'recruiter', label: 'Recruiter', emoji: '👔' }
+                                            ].map((role) => (
+                                                <div
+                                                    key={role.value}
+                                                    onClick={() => changeEventHandler({ 
+                                                        target: { name: 'role', value: role.value } 
+                                                    })}
+                                                    className={`flex flex-col items-center justify-center p-4 
+                                                    rounded-xl border-2 cursor-pointer transition-all duration-300 
+                                                    hover:-translate-y-1 hover:shadow-md
+                                                    ${input.role === role.value 
+                                                        ? 'border-indigo-500 bg-indigo-50/50 shadow-sm' 
+                                                        : 'border-gray-200 hover:border-indigo-200 hover:bg-gray-50/50'
+                                                    }`}
+                                                >
+                                                    <span className="text-2xl mb-2">{role.emoji}</span>
+                                                    <span className="font-medium text-gray-700">{role.label}</span>
+                                                    <Input
+                                                        type="radio"
+                                                        name="role"
+                                                        value={role.value}
+                                                        checked={input.role === role.value}
+                                                        onChange={changeEventHandler}
+                                                        className="hidden"
+                                                    />
+                                                </div>
+                                            ))}
+                                        </RadioGroup>
+                                    </div>
+
+                                    {/* Profile Upload */}
+                                    <div className="space-y-3">
+                                        <Label className="text-gray-700 font-medium pl-1">Profile Photo</Label>
+                                        <div className="relative group">
+                                            <Input
+                                                accept="image/*"
+                                                type="file"
+                                                onChange={changeFileHandler}
+                                                className="file:mr-4 file:py-2.5 file:px-4 file:rounded-xl
+                                                file:border-0 file:text-sm file:font-medium
+                                                file:bg-indigo-50 file:text-indigo-600
+                                                hover:file:bg-indigo-100 cursor-pointer
+                                                h-[104px] pt-8 text-gray-600 text-sm
+                                                border-2 border-dashed rounded-xl
+                                                border-gray-300 hover:border-indigo-400
+                                                transition-all duration-200 bg-white/80"
+                                            />
+                                            <div className="absolute right-4 top-1/2 -translate-y-1/2 
+                                            text-gray-400 pointer-events-none flex items-center gap-2">
+                                                <ImagePlus className="h-5 w-5" />
+                                                <span className="text-sm">Upload</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </RadioGroup>
-                        <div className="flex items-center gap-2">
-                            <Label>Profile</Label>
-                            <Input
-                                accept="image/*"
-                                type="file"
-                                onChange={changeFileHandler}
-                                className="cursor-pointer"
-                            />
+
+                            {/* Submit Button */}
+                            <Button
+                                type="submit"
+                                disabled={loading}
+                                className={`w-full h-14 rounded-xl text-base font-medium 
+                                transition-all duration-300 transform active:scale-[0.98]
+                                ${loading 
+                                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                                    : 'bg-gradient-to-r from-indigo-600 to-blue-600 text-white hover:opacity-90 hover:shadow-lg'
+                                }`}
+                            >
+                                {loading ? (
+                                    <div className="flex items-center justify-center gap-2">
+                                        <Loader2 className="h-5 w-5 animate-spin" />
+                                        <span>Creating your account...</span>
+                                    </div>
+                                ) : (
+                                    'Create Account'
+                                )}
+                            </Button>
                         </div>
-                    </div>
-                    {loading ? (
-                        <Button className="w-full my-4">
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
-                        </Button>
-                    ) : (
-                        <Button type="submit" className="w-full my-4">
-                            Signup
-                        </Button>
-                    )}
-                    <span className="text-sm">
-                        Already have an account?{' '}
-                        <Link to="/login" className="text-blue-600">
-                            Login
-                        </Link>
-                    </span>
-                </form>
+
+                        {/* Login Link */}
+                        <div className="mt-8 text-center">
+                            <span className="text-gray-600">
+                                Already have an account?{' '}
+                                <Link 
+                                    to="/login" 
+                                    className="text-indigo-600 font-medium hover:text-indigo-700 
+                                    hover:underline transition-colors"
+                                >
+                                    Sign in instead
+                                </Link>
+                            </span>
+                        </div>
+                    </form>
+                </div>
             </div>
+            <Footer />
         </div>
     );
 };
